@@ -11,7 +11,7 @@ class NewIncident {
         cy.get(el.value).type(500)
 
         cy.intercept('POST', '**/incidents').as('newIncident')
-        cy.get(el.registerNewIncident).click();
+        cy.get(el.buttonRegisterIncident).click();
         cy.wait('@newIncident').then((xhr) => {
             expect(xhr.response.statusCode).to.eq(200);
             expect(xhr.response.body).has.property('id');
