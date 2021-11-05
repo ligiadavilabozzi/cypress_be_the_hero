@@ -1,5 +1,7 @@
 /// <reference types="cypress" /> 
 
+import Login from '../support/pages/Login'
+
 describe('Ongs',()=>{
     it('The Ongs must be able to register.', ()=>{
     
@@ -20,11 +22,10 @@ describe('Ongs',()=>{
 
     })
 
-    it('The ong must be able to log into the system',()=>{
-  
-        cy.visit('http://localhost:3000/');
-        cy.get('[data-cy="id"]').type(Cypress.env('createdOngId'))
-        cy.get('[data-cy="button-login').click()
+    //pagina -> acoes + elementos
+    it.only('The ong must be able to login into the system',()=>{
+        Login.accessLogin()
+        Login.fillLogin()
     })
 
     it('The ong must be able to disconnected', () =>{
