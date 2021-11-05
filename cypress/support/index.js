@@ -1,5 +1,5 @@
 import './commands'
 
-before(()=>{
+beforeEach(()=>{
     cy.createOng();
 });

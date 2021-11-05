@@ -55,8 +55,19 @@ describe('Ongs',()=>{
      
     }); 
 
-    it('The ong must be able to delete a cases', () =>{
+    it('The ong must be able to delete a case', () =>{
 
+        cy.createNewIncident()
+        cy.login(); 
+        
+        cy.intercept('DELETE', '**/incidents/**').as('deleteIncident')
+        
+        cy.get('li > button > svg').click()
+
+        cy.wait('@deleteIncident').then((xhr)=>{
+            expect(xhr.response.statusCode).to.eq(204); 
+            expect(xhr.response.body).to.be.empty
+        })
         
     }); 
 
