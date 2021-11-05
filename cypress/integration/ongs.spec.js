@@ -26,4 +26,38 @@ describe('Ongs',()=>{
         cy.get('input').type(Cypress.env('createdOngId'))
         cy.get('.button').click()
     })
+
+    it('The ong must be able to disconnected', () =>{
+        
+        cy.login()
+        cy.get('button').click()
+    }); 
+
+
+    it('The ong must be able to register new cases', () =>{
+        cy.login() 
+
+        cy.get('.button').click();
+
+        cy.get('[placeholder="Título do caso"]').type('Preciso de ajuda')
+        cy.get('textarea').type('Sou um cachorrinho de 2 anos e preciso de ajuda com meus gastos')
+        cy.get('[placeholder="Valor em reais"]').type(500)
+        
+        cy.intercept('POST', '**/incidents').as('newIncident')
+
+        cy.get('.button').click();
+
+        cy.wait('@newIncident').then((xhr)=>{
+            expect(xhr.response.statusCode).to.eq(200); 
+            expect(xhr.response.body).has.property('id'); 
+            expect(xhr.response.body.id).is.not.null;
+        })
+     
+    }); 
+
+    it('The ong must be able to delete a cases', () =>{
+
+        
+    }); 
+
 })
