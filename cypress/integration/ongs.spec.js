@@ -21,11 +21,9 @@ describe('Ongs',()=>{
     })
 
     it('The ong must be able to log into the system',()=>{
-        
-       const createOngId = Cypress.env('createdOngId')
-        cy.log(createOngId)
+  
         cy.visit('http://localhost:3000/');
-        cy.get('input').type(createOngId)
+        cy.get('input').type(Cypress.env('createdOngId'))
         cy.get('.button').click()
     })
 })
